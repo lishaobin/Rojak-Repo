@@ -35,9 +35,10 @@ public class NetworkConnection implements Callable<String> {
 
         } else{
             try {
-                url = "0";
+                
                 LogFile logFile = new LogFile();
                 logFile.createLogFile(path, url);
+                url = "0";
             } catch (IOException e) {
                 e.printStackTrace();
             }
