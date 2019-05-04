@@ -10,6 +10,7 @@ public class CheckTable {
     Document doc;
     String tabletext = "";
     String xxx= "";
+    String yyy= "";
 
     public CheckTable(List <String> ValidURLList){
 
@@ -27,13 +28,15 @@ public class CheckTable {
 
                 if (tds.hasText()){
                     Elements table2 = doc.select("div.defaultDialog h2");
-
-                        if (!xxx.equals(table2.text())){
-                            tabletext += table2.text()+"\n";
-                            xxx = table2.text();
+                    for (Element tr1 : table2) {
+                        Elements tds1 = tr1.getElementsMatchingText("\\d{4}?");
+                        if (!xxx.equals(tds1.text())&&(tds1.hasText())){
+                            tabletext += tds1.text() + "\n";
+                            xxx = tds1.text();
                             //System.out.println(tabletext);
                         }
 
+                    }
                     tabletext+=tds.text()+"\n";
                 }
 

@@ -15,6 +15,8 @@ class PropertiesFile {
             System.out.println("Writing to the properties file ......");
             prop.setProperty("path", path);
             prop.setProperty("textFile", fileName);
+            prop.setProperty("sTATE", "KEDAH");
+            prop.setProperty("top 3", "3");
 //            prop.setProperty("state", "password"); //Please read the details from the url links, try to use Jsoup
 //            prop.setProperty("top", "mkyong");
 //            prop.setProperty("player", "password");
