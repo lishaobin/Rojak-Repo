@@ -57,7 +57,7 @@ class DisplayPlayerFromKedah {
         }
     }
 
-    private void ShowPlayer(String rank, String sNo, String name, String rtg, Object replace, String showCat) {
+    private void ShowPlayer(String rank, String sNo, String name, String rtg, String  replace, String showCat) {
         try (InputStream input = new FileInputStream("config.properties")) {    // load a properties file
             prop.load(input);
             System.out.printf("\n%-5s  |  %-5s  |  %-30s | %-8s | %-8s  | %-8s | %-8s", rank, sNo, name, rtg, prop.getProperty("sTATE"), replace, showCat);
