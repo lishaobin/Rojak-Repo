@@ -13,8 +13,6 @@ public class CheckURL {
 
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
-        String playerlist = ""; // all player list.
-
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
         long executeTime = endTime - startTime;
@@ -59,11 +57,13 @@ public class CheckURL {
 
         CheckTable CheckT = new CheckTable(ValidURLlist);
         CheckT.Checktable();
-        playerlist = CheckT.getPlayerList();
-        System.out.println("\n"+playerlist);
 
-
-        System.out.println("\nExecution time in milliseconds: " + executeTime);
+        //***********************************************************
+        ObjectTable [] playerlist = CheckT.getPlayerList();        //*
+        displayAll display = new displayAll(playerlist);           //*  <---------- take playerlist  value to yr constructor to print something
+        display.displayall();                                      //*              i had arrange all player data so that u all can do display ur own
+        //***********************************************************               u all can refer displayAll.class for example
+        System.out.print("Execution time in milliseconds: " + executeTime);
     }
 }
 
