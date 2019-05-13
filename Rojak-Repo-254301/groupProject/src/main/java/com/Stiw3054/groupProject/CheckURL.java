@@ -4,16 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class CheckURL {
 
-    public static void main(String[] args) throws Exception {
-
-        String playerlist = ""; // all player list.
+    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
@@ -27,8 +25,6 @@ public class CheckURL {
         String fileName = String.valueOf(filePath.getFileName());
 
         PropertiesFile propertiesFile = new PropertiesFile();
-        propertiesFile.WritePropertiesFile(path, fileName);
-        propertiesFile.ReadPropertiesFile();
 
         List<String> myURLArrayList = Files.readAllLines(filePath);
         List<String> ValidURLlist = new ArrayList<>();
@@ -59,17 +55,14 @@ public class CheckURL {
 
         CheckTable CheckT = new CheckTable(ValidURLlist);
         CheckT.Checktable();
-        playerlist = CheckT.getPlayerList();
-        System.out.println("\n" + playerlist);
 
-        DisplayPlayerFromKedah displayPlayerFromKedah = new DisplayPlayerFromKedah(ValidURLlist);
-        displayPlayerFromKedah.RetrievePlayer();
+        propertiesFile.WritePropertiesFile(path, fileName);
+        propertiesFile.ReadPropertiesFile();
 
-//        DisplayStatistics displayStatistics=new DisplayStatistics(ValidURLlist);
-//        displayStatistics.run();
+        ObjectTable [] playerlist = CheckT.getPlayerList();        //*
+        displayAll display = new displayAll(playerlist);           //*  <---------- take playerlist  value to yr constructor to print something
+        display.displayall();
 
-        System.out.println("\n\nExecution time in milliseconds: " + executeTime);
+        System.out.println("\nExecution time in milliseconds: " + executeTime);
     }
 }
-
-
