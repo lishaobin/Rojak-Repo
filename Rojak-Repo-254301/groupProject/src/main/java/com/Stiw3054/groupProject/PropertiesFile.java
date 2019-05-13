@@ -1,8 +1,6 @@
 package com.Stiw3054.groupProject;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 class PropertiesFile {
@@ -17,12 +15,7 @@ class PropertiesFile {
             prop.setProperty("textFile", fileName);
             prop.setProperty("sTATE", "KEDAH");
             prop.setProperty("top 3", "3");
-//            prop.setProperty("state", "password"); //Please read the details from the url links, try to use Jsoup
-//            prop.setProperty("top", "mkyong");
-//            prop.setProperty("player", "password");
-            // save properties to project root folder
             prop.store(output, null);
-
             System.out.println("Successfully saved to properties file.");
         } catch (IOException io) {
             io.printStackTrace();
@@ -37,13 +30,9 @@ class PropertiesFile {
             // get the property value and print it out
             System.out.println("Path      -> " + prop.getProperty("path"));
             System.out.println("File Name -> " + prop.getProperty("textFile"));
-//            System.out.println(prop.getProperty("state"));
-//            System.out.println(prop.getProperty("top"));
-//            System.out.println(prop.getProperty("player"));
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
+
 }

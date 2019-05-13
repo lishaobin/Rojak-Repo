@@ -10,7 +10,6 @@ public class CheckTable {
     Document doc;
     String tabletext = "";
     String xxx= "";
-    String yyy= "";
 
     public CheckTable(List <String> ValidURLList){
 
@@ -25,9 +24,8 @@ public class CheckTable {
             Elements table = doc.select("table.CRs1 tr");
             for (Element tr : table) {
                 Elements tds = tr.getElementsByTag("td");
-
                 if (tds.hasText()){
-                    Elements table2 = doc.select("div.defaultDialog h2");
+                    Elements table2 = table.select("div.defaultDialog h2");
                     for (Element tr1 : table2) {
                         Elements tds1 = tr1.getElementsMatchingText("\\d{4}?");
                         if (!xxx.equals(tds1.text())&&(tds1.hasText())){
@@ -39,15 +37,11 @@ public class CheckTable {
                     }
                     tabletext+=tds.text()+"\n";
                 }
-
             }
-
         }
-
     }
 
     public String getPlayerList() {
-
         return tabletext;
     }
 
