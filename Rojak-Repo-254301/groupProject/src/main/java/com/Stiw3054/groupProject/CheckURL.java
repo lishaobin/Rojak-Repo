@@ -4,14 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class CheckURL {
 
-    public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
+    public static void main(String[] args) throws Exception {
+
+        String playerlist = ""; // all player list.
 
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
@@ -20,13 +22,13 @@ public class CheckURL {
         int coreCount = Runtime.getRuntime().availableProcessors();
         ExecutorService executorservice = Executors.newFixedThreadPool(coreCount);
 
-        Path filePath = Paths.get("C:\\Users\\User\\IdeaProjects\\Rojak-Repo-254301\\groupProject\\url.txt"); // Change to your own path
+        Path filePath = Paths.get("C:\\Users\\USER\\Desktop\\Rojak-Repo-245210\\Rojak-Repo-254301\\groupProject\\url.txt"); // Change to your own path
         String path = String.valueOf(filePath.getParent());
         String fileName = String.valueOf(filePath.getFileName());
 
         PropertiesFile propertiesFile = new PropertiesFile();
         propertiesFile.WritePropertiesFile(path, fileName);
-        //propertiesFile.ReadPropertiesFile();
+        propertiesFile.ReadPropertiesFile();
 
         List<String> myURLArrayList = Files.readAllLines(filePath);
         List<String> ValidURLlist = new ArrayList<>();
@@ -34,8 +36,8 @@ public class CheckURL {
 
         for (String url : myURLArrayList) {
             Future<String> ValidURL = executorservice.submit(new NetworkConnection(path, url));
-            if(!ValidURL.get().equals("0"))
-            ValidURLlist.add(ValidURL.get());
+            if (!ValidURL.get().equals("0"))
+                ValidURLlist.add(ValidURL.get());
         }
         ValidURLlist.forEach(System.out::println);
         executorservice.shutdown();
@@ -57,13 +59,16 @@ public class CheckURL {
 
         CheckTable CheckT = new CheckTable(ValidURLlist);
         CheckT.Checktable();
+        playerlist = CheckT.getPlayerList();
+        System.out.println("\n" + playerlist);
 
-        //***********************************************************
-        ObjectTable [] playerlist = CheckT.getPlayerList();        //*
-        displayAll display = new displayAll(playerlist);           //*  <---------- take playerlist  value to yr constructor to print something
-        display.displayall();                                      //*              i had arrange all player data so that u all can do display ur own
-        //***********************************************************               u all can refer displayAll.class for example
-        System.out.print("Execution time in milliseconds: " + executeTime);
+        DisplayPlayerFromKedah displayPlayerFromKedah = new DisplayPlayerFromKedah(ValidURLlist);
+        displayPlayerFromKedah.RetrievePlayer();
+
+//        DisplayStatistics displayStatistics=new DisplayStatistics(ValidURLlist);
+//        displayStatistics.run();
+
+        System.out.println("\n\nExecution time in milliseconds: " + executeTime);
     }
 }
 

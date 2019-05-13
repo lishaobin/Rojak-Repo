@@ -35,7 +35,6 @@ public class NetworkConnection implements Callable<String> {
 
         } else{
             try {
-
                 LogFile logFile = new LogFile();
                 logFile.createLogFile(path, url);
                 url = "0";
