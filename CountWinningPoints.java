@@ -32,22 +32,23 @@ class CountWinningPoints{
     
     public void display(HashMap<String,HashMap<String,Double>> Map){
         double Total = 0;
-        System.out.println("\n\n\t| State         | Category | Total |");
-        System.out.println("\t------------------------------------");
+        System.out.println("\n\n\t|-------------------------------------|");
+        System.out.println("\t| State         | Category |  Total   |");
+        System.out.println("\t|-------------------------------------|");
         for (HashMap.Entry<String,HashMap<String,Double>> entry1 : MainMap.entrySet()) {
             double total = 0;
             for(HashMap.Entry<String,Double> entry2 : entry1.getValue().entrySet()){
-                System.out.printf("\t| %-14s| %-8s | %-5s |\n", entry1.getKey(),entry2.getKey(),entry2.getValue());
+                System.out.printf("\t| %-14s| %-8s | %-8s |\n", entry1.getKey(),entry2.getKey(),entry2.getValue());
                 total += entry2.getValue();
             }
-            System.out.printf("\t| %-14s| %-8s | %-5s |\n", "","TOTAL",total);
+            System.out.printf("\t| %-14s| %-8s | %-8s |\n", "","TOTAL",total);
+            System.out.println("\t|-------------------------------------|");
             Total += total;
         }
-        System.out.printf("\t| %-14s| %-8s | %-5s |\n\n\n", "GRAND TOTAL","",Total);
+        System.out.printf("\t| %-14s| %-8s | %-8s |\n", "GRAND TOTAL","",Total);
+        System.out.println("\t|-------------------------------------|\n\n");
     }
-}
-	                    
-	                        
+}                       
 	                
 	         
 	        
